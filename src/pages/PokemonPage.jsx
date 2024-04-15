@@ -2,40 +2,55 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 const PokemonPage = () => {
-  const [pokemon, setPokemon] = useState([]);
+  // Declare a variable to store dynamic data and setter function to update it
+  const [pokemonList, setPokemonList] = useState([]);
 
+  // Declare the getAllPokemon function that gets the data from the API
   const getAllPokemon = async () => {
     try {
-      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/`);
+      const response = await fetch("https://pokeapi.co/api/v2/pokemon/");
       if (response.ok) {
-        const pokemonData = await response.json();
-        console.log(pokemonData);
-        setPokemon(pokemonData.results);
+        const data = await response.json();
+        const pokemonWithDetails = await Promise.all(
+          data.results.map(async (pokemon) => {
+            const detailResponse = await fetch(pokemon.url);
+            if (detailResponse.ok) {
+              const detailData = await detailResponse.json();
+              return { ...pokemon, details: detailData };
+            } else {
+              throw new Error(`Failed to fetch details for ${pokemon.name}`);
+            }
+          })
+        );
+        setPokemonList(pokemonWithDetails);
+        console.log(pokemonWithDetails);
       }
     } catch (error) {
       console.log("Error fetching the API", error);
     }
   };
 
+  // Run useEffect to run a function (the getAllPokemon function) one time at the start
   useEffect(() => {
     getAllPokemon();
   }, []);
 
-  // Array = [{}, {}]
-
-  // axios, fetch
-
-  // useState
-
-  // useEffect  (function() , [])
-
-  // As soon as the page loads, do the function that request the information from the API. And then store it in a variable. (and then later display it)
+  // Return the actual page below
 
   return (
     <>
       <h1>I am the Pokemon Page</h1>;
-      {pokemon.map((currentPokemon) => {
-        return <h1>hello</h1>;
+      {/* Loop over the array of objects [{}, {}, ..] and create list elements, names etc for each of the objects */}
+      {pokemonList.map((currentPokemon) => {
+        return (
+          <div key={currentPokemon.details.id}>
+            <img src={currentPokemon.details.sprites.front_default} alt="" />
+            <h1>{currentPokemon.name}</h1>
+            <p>{currentPokemon.details.id}</p>
+            <p>{currentPokemon.details.height}</p>
+            <p>{currentPokemon.details.weight}</p>
+          </div>
+        );
       })}
     </>
   );
