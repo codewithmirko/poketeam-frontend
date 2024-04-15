@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Button } from "@mantine/core";
 
 const HomePage = () => {
   return (
@@ -14,10 +13,6 @@ const HomePage = () => {
       <Link to="/log-in">
         <button type="button">Log-In</button>
       </Link>
-      <Button variant="filled" color="red" radius="xl">
-        Button
-      </Button>
-      ;
     </>
   );
 };
