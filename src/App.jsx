@@ -6,6 +6,7 @@ import PokemonPage from "./pages/PokemonPage";
 import PokemonDetailsPage from "./pages/PokemonDetailsPage";
 import LogInPage from "./pages/LogInPage";
 import TeamPage from "./pages/TeamPage";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/log-in" element={<LogInPage />} />
         <Route path="/team" element={<TeamPage />} />
       </Routes>
+      <Footer />
     </>
   );
 }
