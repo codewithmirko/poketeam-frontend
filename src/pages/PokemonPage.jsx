@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const PokemonPage = () => {
   // Declare a variable to store dynamic data and setter function to update it
@@ -44,11 +45,13 @@ const PokemonPage = () => {
       {pokemonList.map((currentPokemon) => {
         return (
           <div key={currentPokemon.details.id}>
-            <img src={currentPokemon.details.sprites.front_default} alt="" />
-            <h1>{currentPokemon.name}</h1>
-            <p>{currentPokemon.details.id}</p>
-            <p>{currentPokemon.details.height}</p>
-            <p>{currentPokemon.details.weight}</p>
+            <Link to={`/pokemon/${currentPokemon.details.id}`}>
+              <img src={currentPokemon.details.sprites.front_default} alt="" />
+              <h1>{currentPokemon.name}</h1>
+              <p>{cuntPokemon.details.idrre}</p>
+              <p>{currentPokemon.details.height}</p>
+              <p>{currentPokemon.details.weight}</p>
+            </Link>
           </div>
         );
       })}
