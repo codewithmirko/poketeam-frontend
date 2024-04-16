@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import styles from "../styles/PokemonPage.module.css";
 
 const PokemonPage = () => {
   // Declare a variable to store dynamic data and setter function to update it
@@ -44,7 +45,7 @@ const PokemonPage = () => {
       {/* Loop over the array of objects [{}, {}, ..] and create list elements, names etc for each of the objects */}
       {pokemonList.map((currentPokemon) => {
         return (
-          <div key={currentPokemon.details.id}>
+          <div key={currentPokemon.details.id} className={styles.card}>
             <Link to={`/pokemon/${currentPokemon.details.id}`}>
               <img src={currentPokemon.details.sprites.front_default} alt="" />
               <h1>{currentPokemon.name}</h1>

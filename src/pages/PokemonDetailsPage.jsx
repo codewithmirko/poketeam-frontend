@@ -22,11 +22,64 @@ const PokemonDetailsPage = () => {
     getSinglePokemon();
   }, []);
 
+  const navigate = useNavigate();
+
+  const handleAddToTeam = async (event) => {
+    event.preventDefault();
+    const payload = { id };
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/team`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      if (response.ok) {
+        navigate(`/team`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <h1> Details Page</h1>
-      <p>{singlePokemon.name}</p>
-      <img src={singlePokemon.sprites?.front_default} alt="" />
+      <h2>{singlePokemon.name}</h2>
+      <img
+        src={singlePokemon.sprites?.front_default}
+        alt=""
+        className="detail-img"
+      />
+      <p>#{singlePokemon.id}</p>
+      <p>{singlePokemon.height / 10} m</p>
+      <p>{singlePokemon.weight / 10} kg</p>
+      {/* Check if singlePokemon.types exists and is an array */}
+      {singlePokemon.types && Array.isArray(singlePokemon.types) && (
+        <div>
+          {/* Loop over the types array and render each type name */}
+          {singlePokemon.types.map((type, index) => (
+            <p key={index}>{type.type.name}</p>
+          ))}
+
+          {/* Check if singlePokemon.stats exists and is an array */}
+          {singlePokemon.stats && Array.isArray(singlePokemon.stats) && (
+            <div>
+              {/* Loop over the stats array and render each stat */}
+              {singlePokemon.stats.map((stat, index) => (
+                <p key={index}>
+                  {stat.stat.name}: {stat.base_stat}
+                </p>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+      <button type="button" onClick={handleAddToTeam}>
+        Add to team
+      </button>
     </>
   );
 };
