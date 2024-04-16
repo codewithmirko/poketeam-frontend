@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const HomePage = () => {
   return (
     <>
-      <h1>Welcome to PokeTeam</h1>
+      <h1>Hello! Welcome to PokeTeam</h1>
       <Link to="/team">
         <button type="button">My Team</button>
       </Link>
