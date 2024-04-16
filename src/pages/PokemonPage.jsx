@@ -48,7 +48,7 @@ const PokemonPage = () => {
             <Link to={`/pokemon/${currentPokemon.details.id}`}>
               <img src={currentPokemon.details.sprites.front_default} alt="" />
               <h1>{currentPokemon.name}</h1>
-              <p>{cuntPokemon.details.idrre}</p>
+              <p>{currentPokemon.details.id}</p>
               <p>{currentPokemon.details.height}</p>
               <p>{currentPokemon.details.weight}</p>
             </Link>

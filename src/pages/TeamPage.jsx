@@ -7,7 +7,7 @@ const TeamPage = () => {
   //define function to get Data from fake backend localhost4000
   const getInfo = async () => {
     try {
-      const response = await fetch("http://localhost:4000/users");
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/users`);
       if (response.ok) {
         const infoData = await response.json();
         setInfo(infoData);
