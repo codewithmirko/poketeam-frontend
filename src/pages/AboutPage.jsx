@@ -1,3 +1,5 @@
+import style from "./AboutPage.module.css";
+
 import mirko from "../assets/Mirko.png";
 import kivanc from "../assets/Kivanc.png";
 const TeamMember = ({ name, role, github, linkedin, imageUrl }) => (

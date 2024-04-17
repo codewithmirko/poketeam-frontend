@@ -1,8 +1,43 @@
+.cardContainer {
+  margin: 15px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 .card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background-color: rgb(243, 243, 243);
   border: 1px solid black;
   padding: 30px;
-  width: 25%;
+  min-width: 20%;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   border-radius: 50px;
+  text-align: center;
+  flex: 1 1 20%;
+  margin: 20px;
+  box-sizing: border-box;
+  min-width: 260px;
+}
+
+.card a {
+  text-decoration: none;
+}
+
+.detail-img {
+  width: 120%;
+}
+
+.pokemonDetails {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.pokemonDetails button span {
+  color: white;
 }

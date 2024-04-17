@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import styles from "../styles/PokemonPage.module.css";
 
+import { Button } from "@mantine/core";
+
 const PokemonPage = () => {
   const [pokemonList, setPokemonList] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
@@ -47,22 +49,39 @@ const PokemonPage = () => {
     <>
       <h1>I am the Pokemon Page</h1>{" "}
       <p>Click on the Pokemon Cards if you want to see more details!</p>
-      {currentPageData.map((currentPokemon) => {
-        return (
-          <div key={currentPokemon.details.id} className={styles.card}>
-            <Link to={`/pokemon/${currentPokemon.details.id}`}>
-              <img src={currentPokemon.details.sprites.front_default} alt="" />
-              <h1>
-                {currentPokemon.name[0].toUpperCase() +
-                  currentPokemon.name.slice(1)}
-              </h1>
-              <p>#{currentPokemon.details.id}</p>
-              <p>Height: {currentPokemon.details.height}</p>
-              <p>Weight: {currentPokemon.details.weight}</p>
-            </Link>
-          </div>
-        );
-      })}
+      <div className={styles.cardContainer}>
+        {currentPageData.map((currentPokemon) => {
+          return (
+            <div key={currentPokemon.details.id} className={styles.card}>
+              <Link to={`/pokemon/${currentPokemon.details.id}`}>
+                <img
+                  src={currentPokemon.details.sprites.front_default}
+                  alt=""
+                />
+                <h1>
+                  {currentPokemon.name[0].toUpperCase() +
+                    currentPokemon.name.slice(1)}
+                </h1>
+                <p>#{currentPokemon.details.id}</p>
+                <div className={styles.pokemonDetails}>
+                  <Button
+                    variant="filled"
+                    color="#000000ff"
+                    radius="xl"
+                    className={styles.blackButton}
+                  >
+                    {currentPokemon.details.height / 10} m
+                  </Button>
+
+                  <Button variant="filled" color="red" radius="xl">
+                    {currentPokemon.details.weight / 10} kg
+                  </Button>
+                </div>
+              </Link>
+            </div>
+          );
+        })}
+      </div>
       {/* Pagination component */}
       <ReactPaginate
         previousLabel={"Previous"}
