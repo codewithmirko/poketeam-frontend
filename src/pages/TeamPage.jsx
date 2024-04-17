@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 const TeamPage = () => {
   // store info in useState
   const [team, setTeam] = useState([]);
+  const [nickname, setNickname] = useState("");
+  const [editingPokemonId, setEditingPokemonId] = useState(null); // Initialize editingPokemonId state
   const navigate = useNavigate();
 
   //define function to get Data from fake backend localhost4000
@@ -44,12 +46,23 @@ const TeamPage = () => {
     }
   };
 
-  const handleEdit = async (id) => {
-    const payload = { nickName: s };
+  const handleEdit = (id) => {
+    // Set the editingPokemonId state to the ID of the Pokemon being edited
+    setEditingPokemonId(id);
+  };
+
+  const handleEditSubmit = async () => {
+    const editedPokemon = team.find(
+      (pokemon) => pokemon.id === editingPokemonId
+    );
+    if (!editedPokemon) return;
+
+    // Add other Stuff here
+    const payload = { nickname };
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/team/${id}`,
+        `${import.meta.env.VITE_API_URL}/team/${editingPokemonId}`,
         {
           method: "PUT",
           headers: {
@@ -59,11 +72,25 @@ const TeamPage = () => {
         }
       );
       if (response.ok) {
-        navigate(`/team/${projectId}`);
+        // Update the nickname for the edited pokemon in the team state
+        setTeam((prevTeam) =>
+          prevTeam.map((pokemon) =>
+            pokemon.id === editingPokemonId ? { ...pokemon, nickname } : pokemon
+          )
+        );
+
+        // Clear the nickname input field
+        setNickname("");
+
+        // Clear the editingPokemonId state
+        setEditingPokemonId(null);
       }
     } catch (error) {
       console.log(error);
     }
+  };
+  const handleChange = (e) => {
+    setNickname(e.target.value);
   };
 
   return (
@@ -78,15 +105,12 @@ const TeamPage = () => {
               <p>{currentTeam.name}</p>
               <p>{currentTeam.height}</p>
               <p>{currentTeam.weight}</p>
-
               <p>
                 Types:{" "}
                 {currentTeam.types.map((type, index) => (
                   <span key={index}>{type}</span>
                 ))}
               </p>
-
-              {/* Display stats */}
               <div>
                 Stats:
                 {currentTeam.stats.map((stat, index) => (
@@ -95,6 +119,8 @@ const TeamPage = () => {
                   </p>
                 ))}
               </div>
+              {/* Display nickname if it exists */}
+              {currentTeam.nickname && <p>Nickname: {currentTeam.nickname}</p>}
             </Link>
             <button type="button" onClick={() => handleDelete(currentTeam.id)}>
               Delete
@@ -102,6 +128,18 @@ const TeamPage = () => {
             <button type="button" onClick={() => handleEdit(currentTeam.id)}>
               Edit
             </button>
+
+            {currentTeam.id === editingPokemonId && (
+              <div>
+                <input
+                  type="text"
+                  placeholder="Enter nickname"
+                  value={nickname}
+                  onChange={handleChange}
+                />
+                <button onClick={handleEditSubmit}>Submit</button>
+              </div>
+            )}
           </div>
         );
       })}
