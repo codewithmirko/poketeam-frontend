@@ -40,6 +40,34 @@ const links = [
 function Navbar() {
   const [opened, { toggle }] = useDisclosure(false);
   const [active, setActive] = useState(links[0].link);
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+
+  // const handleTeamClick = async () => {
+  //   try {
+  //     const response = await fetch(`${import.meta.env.VITE_API_URL}/users`);
+  //     if (response.ok) {
+  //       const usersData = await response.json();
+  //       const user = usersData.find(
+  //         (u) => u.email === email && u.password === password
+  //       );
+  //       if (user) {
+  //         // Successful login, navigate to team page
+  //         navigate(`/team`);
+  //       } else {
+  //         // Incorrect credentials, display an error alert
+  //         alert("Invalid email or password. Please try again.");
+  //       }
+  //     } else {
+  //       // Handle HTTP error responses
+  //       alert("Failed to fetch user data. Please try again later.");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     // Handle other errors
+  //     alert("An unexpected error occurred. Please try again later.");
+  //   }
+  // };
 
   const items = links.map((link) => (
     <Link

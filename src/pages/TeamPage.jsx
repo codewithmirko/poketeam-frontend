@@ -58,7 +58,16 @@ const TeamPage = () => {
     if (!editedPokemon) return;
 
     // Add other Stuff here
-    const payload = { nickname };
+    const payload = {
+      nickname,
+      id: editedPokemon.id,
+      name: editedPokemon.name,
+      height: editedPokemon.height,
+      weight: editedPokemon.weight,
+      image: editedPokemon.image,
+      types: editedPokemon.types,
+      stats: editedPokemon.stats,
+    };
 
     try {
       const response = await fetch(
