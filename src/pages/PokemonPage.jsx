@@ -41,7 +41,8 @@ const PokemonPage = () => {
 
   return (
     <>
-      <h1>I am the Pokemon Page</h1>;
+      <h1>I am the Pokemon Page</h1>{" "}
+      <p>Click on the Pokemon Cards if you want to see more details!</p>
       {/* Loop over the array of objects [{}, {}, ..] and create list elements, names etc for each of the objects */}
       {pokemonList.map((currentPokemon) => {
         return (

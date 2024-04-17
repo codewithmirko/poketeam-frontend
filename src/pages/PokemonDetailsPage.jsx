@@ -26,7 +26,18 @@ const PokemonDetailsPage = () => {
 
   const handleAddToTeam = async (event) => {
     event.preventDefault();
-    const payload = { id };
+    const payload = {
+      id: singlePokemon.id,
+      image: singlePokemon.sprites?.front_default,
+      name: singlePokemon.name,
+      height: singlePokemon.height,
+      weight: singlePokemon.weight,
+      types: singlePokemon.types.map((type) => type.type.name),
+      stats: singlePokemon.stats.map((stat) => ({
+        name: stat.stat.name,
+        base_stat: stat.base_stat,
+      })),
+    };
 
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/team`, {
