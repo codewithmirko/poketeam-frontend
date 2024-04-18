@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import styles from "../styles/PokemonDetailsPage.module.css";
+import { Button } from "@mantine/core";
 
 const PokemonDetailsPage = () => {
   const [singlePokemon, setSinglePokemon] = useState({});
@@ -70,32 +71,57 @@ const PokemonDetailsPage = () => {
               singlePokemon.name[0].toUpperCase() + singlePokemon.name.slice(1)}
           </h2>
           <p>#{singlePokemon.id}</p>
-          <p>{singlePokemon.height / 10} m</p>
-          <p>{singlePokemon.weight / 10} kg</p>
+          <div class={styles.sizeContainer}>
+            <Button
+              variant="filled"
+              color="#2d2c54"
+              radius="xl"
+              className={styles.blackButton}
+            >
+              {singlePokemon.height / 10} m
+            </Button>
+            <Button variant="filled" color="#fd5e5c" radius="xl">
+              {singlePokemon.weight / 10} kg
+            </Button>
+          </div>
           {/* Check if singlePokemon.types exists and is an array */}
           {singlePokemon.types && Array.isArray(singlePokemon.types) && (
-            <div>
+            <div class={styles.typesContainer}>
               {/* Loop over the types array and render each type name */}
               {singlePokemon.types.map((type, index) => (
-                <p key={index}>{type.type.name.toUpperCase()}</p>
+                <Button
+                  key={index}
+                  variant="filled"
+                  color="rgba(158, 158, 158, 1)"
+                  radius="xl"
+                >
+                  {type.type.name.toUpperCase()}
+                </Button>
               ))}
-
-              {/* Check if singlePokemon.stats exists and is an array */}
-              {singlePokemon.stats && Array.isArray(singlePokemon.stats) && (
-                <div>
-                  {/* Loop over the stats array and render each stat */}
-                  {singlePokemon.stats.map((stat, index) => (
-                    <p key={index}>
-                      {stat.stat.name.toUpperCase()}: {stat.base_stat}
-                    </p>
-                  ))}
-                </div>
-              )}
             </div>
           )}
-          <button type="button" onClick={handleAddToTeam}>
+          {/* Check if singlePokemon.stats exists and is an array */}
+          {singlePokemon.stats && Array.isArray(singlePokemon.stats) && (
+            <div class={styles.statsContainer}>
+              {/* Loop over the stats array and render each stat */}
+              {singlePokemon.stats.map((stat, index) => (
+                <p key={index} className={styles.stats}>
+                  {stat.stat.name.toUpperCase()}: {stat.base_stat}
+                </p>
+              ))}
+            </div>
+          )}
+
+          <Button
+            type="button"
+            onClick={handleAddToTeam}
+            variant="filled"
+            color="teal"
+            size="md"
+            radius="md"
+          >
             Add to team
-          </button>
+          </Button>
         </div>
       </div>
     </>

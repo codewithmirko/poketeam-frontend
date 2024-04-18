@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import styles from "../styles/TeamPage.module.css";
 
 const TeamPage = () => {
   // store info in useState
@@ -105,53 +106,63 @@ const TeamPage = () => {
   return (
     <>
       <h1>Team Page</h1>
-      {team.map((currentTeam) => {
-        return (
-          <div key={currentTeam.id}>
-            <Link to="/">
-              <img src={currentTeam.image} alt={currentTeam.name} />
-              <h1>{currentTeam.id}</h1>
-              <p>{currentTeam.name}</p>
-              <p>{currentTeam.height}</p>
-              <p>{currentTeam.weight}</p>
-              <p>
-                Types:{" "}
-                {currentTeam.types.map((type, index) => (
-                  <span key={index}>{type}</span>
-                ))}
-              </p>
-              <div>
-                Stats:
-                {currentTeam.stats.map((stat, index) => (
-                  <p key={index}>
-                    {stat.name}: {stat.base_stat}
-                  </p>
-                ))}
-              </div>
-              {/* Display nickname if it exists */}
-              {currentTeam.nickname && <p>Nickname: {currentTeam.nickname}</p>}
-            </Link>
-            <button type="button" onClick={() => handleDelete(currentTeam.id)}>
-              Delete
-            </button>
-            <button type="button" onClick={() => handleEdit(currentTeam.id)}>
-              Edit
-            </button>
+      <div className={styles.bigCardContainer}>
+        {team.map((currentTeam) => {
+          return (
+            <div key={currentTeam.id}>
+              <div className={styles.bigCard}>
+                <img src={currentTeam.image} alt={currentTeam.name} />
+                <h1>{currentTeam.id}</h1>
+                <p>{currentTeam.name}</p>
+                <p>{currentTeam.height}</p>
+                <p>{currentTeam.weight}</p>
+                <p>
+                  Types:{" "}
+                  {currentTeam.types.map((type, index) => (
+                    <span key={index}>{type}</span>
+                  ))}
+                </p>
+                <div>
+                  Stats:
+                  {currentTeam.stats.map((stat, index) => (
+                    <p key={index}>
+                      {stat.name}: {stat.base_stat}
+                    </p>
+                  ))}
+                </div>
+                {/* Display nickname if it exists */}
+                {currentTeam.nickname && (
+                  <p>Nickname: {currentTeam.nickname}</p>
+                )}
+                <button
+                  type="button"
+                  onClick={() => handleDelete(currentTeam.id)}
+                >
+                  Delete
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleEdit(currentTeam.id)}
+                >
+                  Edit
+                </button>
 
-            {currentTeam.id === editingPokemonId && (
-              <div>
-                <input
-                  type="text"
-                  placeholder="Enter nickname"
-                  value={nickname}
-                  onChange={handleChange}
-                />
-                <button onClick={handleEditSubmit}>Submit</button>
+                {currentTeam.id === editingPokemonId && (
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Enter nickname"
+                      value={nickname}
+                      onChange={handleChange}
+                    />
+                    <button onClick={handleEditSubmit}>Submit</button>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        );
-      })}
+            </div>
+          );
+        })}
+      </div>
     </>
   );
 };
