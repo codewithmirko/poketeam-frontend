@@ -1,4 +1,4 @@
-import style from "./AboutPage.module.css";
+import styles from "../styles/AboutPage.module.css";
 
 import mirko from "../assets/Mirko.png";
 import kivanc from "../assets/Kivanc.png";
@@ -27,8 +27,8 @@ const TeamMember = ({ name, role, github, linkedin, imageUrl }) => (
 
 const AboutPage = () => {
   return (
-    <div className="about-page">
-      <h1>About Us</h1>
+    <div className={styles.aboutPage}>
+      <h1 className={styles.headline}>About Us</h1>
       <p>
         We are a team of developers who love to code. Ironhack is our bootcamp.
         We are based in Germany. We hope to see you in other projects.

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styles from "../styles/LogInPage.module.css";
 
 const LogInPage = () => {
   const [email, setEmail] = useState("");
@@ -35,7 +36,7 @@ const LogInPage = () => {
 
   return (
     <>
-      <h1>Login</h1>
+      <h1 className={styles.test}>Login</h1>
       <h2>Login Form</h2>
       <form onSubmit={handleLogin}>
         <div>

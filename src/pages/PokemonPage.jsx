@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import styles from "../styles/PokemonPage.module.css";
+import Search from "../components/Search";
 
 import { Button } from "@mantine/core";
 
 const PokemonPage = () => {
   const [pokemonList, setPokemonList] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
+  const [query, setQuery] = useState("");
   const perPage = 20; // Number of Pokemon to display per page
 
   useEffect(() => {
@@ -42,12 +44,20 @@ const PokemonPage = () => {
     setCurrentPage(selected);
   };
 
+  const searchHandler = (string) => {
+    setQuery(string.toLowerCase());
+  };
+
+  const filteredPokemonList = pokemonList.filter((pokemon) =>
+    pokemon.name.includes(query)
+  );
+
   const offset = currentPage * perPage;
-  const currentPageData = pokemonList.slice(offset, offset + perPage);
+  const currentPageData = filteredPokemonList.slice(offset, offset + perPage);
 
   return (
     <>
-      <h1>I am the Pokemon Page</h1>{" "}
+      <h1>All pokemon</h1> <Search searchHandler={searchHandler} />
       <p>Click on the Pokemon Cards if you want to see more details!</p>
       <div className={styles.cardContainer}>
         {currentPageData.map((currentPokemon) => {
@@ -57,6 +67,7 @@ const PokemonPage = () => {
                 <img
                   src={currentPokemon.details.sprites.front_default}
                   alt=""
+                  className={styles.smallImage}
                 />
                 <h1>
                   {currentPokemon.name[0].toUpperCase() +
@@ -66,14 +77,14 @@ const PokemonPage = () => {
                 <div className={styles.pokemonDetails}>
                   <Button
                     variant="filled"
-                    color="#000000ff"
+                    color="#2d2c54"
                     radius="xl"
                     className={styles.blackButton}
                   >
                     {currentPokemon.details.height / 10} m
                   </Button>
 
-                  <Button variant="filled" color="red" radius="xl">
+                  <Button variant="filled" color="#fd5e5c" radius="xl">
                     {currentPokemon.details.weight / 10} kg
                   </Button>
                 </div>
@@ -87,7 +98,7 @@ const PokemonPage = () => {
         previousLabel={"Previous"}
         nextLabel={"Next"}
         breakLabel={"..."}
-        pageCount={Math.ceil(pokemonList.length / perPage)}
+        pageCount={Math.ceil(filteredPokemonList.length / perPage)}
         marginPagesDisplayed={2}
         pageRangeDisplayed={5}
         onPageChange={handlePageChange}
