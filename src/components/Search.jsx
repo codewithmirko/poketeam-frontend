@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "../styles/Search.module.css";
 
 function Search({ searchHandler }) {
   const [string, setString] = useState("");
@@ -9,20 +10,18 @@ function Search({ searchHandler }) {
   };
 
   return (
-    <div className="d-inline-flex justify-content-center align-items-center w-100 p-4">
-      <div className="input-group mb-2 w-50">
-        <div className="input-group-prepend">
-          <span className="input-group-text" id="basic-addon1">
-            Search
-          </span>
-        </div>
-        <input
-          type="text"
-          className="form-control search-bar"
-          value={string}
-          onChange={handleSearch}
-        />
-      </div>
+    <div className={styles.searchContainer}>
+      <label htmlFor="searchInput" className={styles.searchLabel}>
+        Search:
+      </label>
+      <input
+        type="text"
+        id="searchInput"
+        className={styles.searchInput}
+        value={string}
+        onChange={handleSearch}
+        placeholder="Pikachu"
+      />
     </div>
   );
 }

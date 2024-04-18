@@ -57,8 +57,11 @@ const PokemonPage = () => {
 
   return (
     <>
-      <h1>All pokemon</h1> <Search searchHandler={searchHandler} />
-      <p>Click on the Pokemon Cards if you want to see more details!</p>
+      <h1>Discover all pokemon</h1>{" "}
+      <p>Click on the cards to see more details.</p>
+      <div className={styles.searchBar}>
+        <Search searchHandler={searchHandler} />
+      </div>
       <div className={styles.cardContainer}>
         {currentPageData.map((currentPokemon) => {
           return (
