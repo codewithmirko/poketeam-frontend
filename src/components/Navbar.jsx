@@ -27,7 +27,7 @@ import { useState } from "react";
 import { Container, Group, Burger } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import classes from "../styles/HeaderSimple.module.css";
-import testLogo from "../assets/test-logo.png";
+import Pokeball from "../assets/pokeball.png";
 
 const links = [
   { link: "/", label: "Home" },
@@ -84,7 +84,7 @@ function Navbar() {
   return (
     <header className={classes.header}>
       <Container size="md" className={classes.inner}>
-        <img src={testLogo} className={classes.logo} />
+        <img src={Pokeball} className={classes.logo} width="20%" />
         <Group gap={5} visibleFrom="xs">
           {items}
         </Group>

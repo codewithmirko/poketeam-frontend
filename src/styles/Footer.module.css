@@ -1,3 +1,12 @@
 .footer {
-  background-color: var(--black);
+  background-color: var(--white);
+  height: rem(80px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  border-top: 1px solid var(--black);
 }

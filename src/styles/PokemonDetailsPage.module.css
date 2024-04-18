@@ -1,13 +1,13 @@
-.cardContainer {
+.bigCardContainer {
   margin: 15px;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   min-height: 80vh;
 }
 
-.card {
+.bigCard {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,13 +47,4 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
-}
-
-.pokemonDetails button span {
-  color: white;
-}
-
-.searchBar {
-  display: flex;
-  justify-content: center;
 }

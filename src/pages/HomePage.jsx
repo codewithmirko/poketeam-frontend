@@ -1,18 +1,26 @@
 import { Link } from "react-router-dom";
+import styles from "../styles/HomePage.module.css";
+import { Button } from "@mantine/core";
 
 const HomePage = () => {
   return (
     <>
-      <h1>Hello! Welcome to PokeTeam</h1>
-      <Link to="/team">
-        <button type="button">My Team</button>
-      </Link>
-      <Link to="/pokemon">
-        <button type="button">All Pokemon</button>
-      </Link>
-      <Link to="/log-in">
-        <button type="button">Log-In</button>
-      </Link>
+      <div className={styles.heroContainer}>
+        <h1 className={styles.headline}>Welcome to PokéTeam</h1>
+        <div>
+          <Link to="/pokemon">
+            <Button
+              variant="filled"
+              color="red"
+              size="xl"
+              radius="lg"
+              className="startButton"
+            >
+              Discover all Pokémon
+            </Button>
+          </Link>
+        </div>
+      </div>
     </>
   );
 };

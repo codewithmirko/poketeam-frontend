@@ -1,11 +1,22 @@
-/* .headline {
-  color: green;
-} */
-/* 
-h1 {
-  color: blue;
+.aboutPage {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 65%;
+  margin: 0 auto;
 }
 
-.aboutPage {
+.memberImage {
+  width: 50%;
+  border-radius: 50%;
+}
+
+.teamMembers {
   display: flex;
-} */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 40vh;
+}

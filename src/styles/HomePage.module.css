@@ -1,0 +1,27 @@
+.heroContainer {
+  background-image: url("../assets/hero-image.jpg");
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.headline {
+  color: white;
+  font-size: 4rem;
+  font-weight: bold;
+  text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+.startbutton {
+  color: white;
+  padding: 10px 20px; /* Set padding */
+}
+
+span {
+  color: white;
+}
