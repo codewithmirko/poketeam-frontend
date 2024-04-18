@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "../styles/TeamPage.module.css";
+import { Button } from "@mantine/core";
 
 const TeamPage = () => {
   // store info in useState
@@ -112,21 +113,43 @@ const TeamPage = () => {
             <div key={currentTeam.id}>
               <div className={styles.bigCard}>
                 <img src={currentTeam.image} alt={currentTeam.name} />
-                <h1>{currentTeam.id}</h1>
-                <p>{currentTeam.name}</p>
-                <p>{currentTeam.height}</p>
-                <p>{currentTeam.weight}</p>
-                <p>
-                  Types:{" "}
-                  {currentTeam.types.map((type, index) => (
-                    <span key={index}>{type}</span>
-                  ))}
-                </p>
-                <div>
-                  Stats:
+                <h1>
+                  {currentTeam.name[0].toUpperCase() +
+                    currentTeam.name.slice(1)}
+                </h1>
+                <div className={styles.sizeContainer}>
+                  <Button
+                    variant="filled"
+                    color="#2d2c54"
+                    radius="xl"
+                    className={styles.blackButton}
+                  >
+                    {currentTeam.height / 10} m
+                  </Button>
+                  <Button variant="filled" color="#fd5e5c" radius="xl">
+                    {currentTeam.weight / 10} kg
+                  </Button>
+                </div>
+                <div className={styles.sizeContainer}>
+                  <p>
+                    {" "}
+                    {currentTeam.types.map((type, index) => (
+                      <Button
+                        key={index}
+                        variant="filled"
+                        color="rgba(158, 158, 158, 1)"
+                        radius="xl"
+                      >
+                        {" "}
+                        {type}
+                      </Button>
+                    ))}
+                  </p>
+                </div>
+                <div className={styles.statsContainer}>
                   {currentTeam.stats.map((stat, index) => (
-                    <p key={index}>
-                      {stat.name}: {stat.base_stat}
+                    <p key={index} className={styles.stats}>
+                      {stat.name.toUpperCase()}: {stat.base_stat}
                     </p>
                   ))}
                 </div>
@@ -134,18 +157,28 @@ const TeamPage = () => {
                 {currentTeam.nickname && (
                   <p>Nickname: {currentTeam.nickname}</p>
                 )}
-                <button
+
+                <Button
+                  variant="filled"
+                  color="red"
+                  size="md"
+                  radius="md"
                   type="button"
                   onClick={() => handleDelete(currentTeam.id)}
                 >
                   Delete
-                </button>
-                <button
+                </Button>
+
+                <Button
                   type="button"
                   onClick={() => handleEdit(currentTeam.id)}
+                  variant="filled"
+                  color="yellow"
+                  size="md"
+                  radius="lg"
                 >
                   Edit
-                </button>
+                </Button>
 
                 {currentTeam.id === editingPokemonId && (
                   <div>
